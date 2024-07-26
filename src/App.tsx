@@ -25,7 +25,7 @@ function App() {
   const incorrectLetters = guessedLetters.filter(letter => !wordToGuess.includes(letter));
   const maxGuesses = 6;
   const isLoser = incorrectLetters.length >= maxGuesses;
-  const isWinner = wordToGuess.replace(' ', '').split("").every(letter => guessedLetters.includes(letter));
+  const isWinner = wordToGuess.replace(/ /g, '').split("").every(letter => guessedLetters.includes(letter));
   const numGuessesRemaining = maxGuesses - incorrectLetters.length;
   const isGameOver = isLoser || isWinner;
 
