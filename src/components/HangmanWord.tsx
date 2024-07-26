@@ -17,13 +17,13 @@ export function HangmanWord({guessedLetters, wordToGuess, revealWord = false}: H
       }}
     >
       {wordToGuess.split("").map((letter, index) => (
-        <span style={{ borderBottom: ".1em solid black" }} key={index}>
+        <span style={{ borderBottom: ".1em solid var(--color-1)" }} key={index}>
           <span
             style={{
               visibility: guessedLetters.includes(letter) || revealWord
                 ? "visible"
                 : "hidden",
-              color: (!guessedLetters.includes(letter) && revealWord) ? "red" : "black"
+              color: (!guessedLetters.includes(letter) && revealWord) ? "var(--error-color)" : "var(--color-1)"
             }}
           >
             {letter}

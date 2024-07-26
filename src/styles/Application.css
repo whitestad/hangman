@@ -1,3 +1,15 @@
 :root {
+  --background-color: #000000;
+  --color-1: #dcd1d1;
+  --error-color: #ff5858;
   --color-blue: #5DADEC;
+}
+
+html{
+  color: white;
+}
+
+body{
+  background-color: var(--background-color);
+  color: white;
 }

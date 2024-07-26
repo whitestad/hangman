@@ -1,3 +1,4 @@
+import style from './../styles/InfoPanel.module.css'
 
 interface InfoPanelProps {
     isWinner: boolean
@@ -9,12 +10,14 @@ interface InfoPanelProps {
 
 export function InfoPanel({ isWinner, isLoser, numGuessesRemaining, score, bestScore }: InfoPanelProps) {
     return (
-        <div className={'infoPanel'}>
+        <div className={style.infoPanel}>
             {isWinner && <div>You Win!</div>}
             {isLoser && <div>You Lose!</div>}
-            <span>{numGuessesRemaining}</span>
-            <div>Best Score: {bestScore}</div>
-            <div>Score: {score}</div>
+            <div className={style.recordsFlex}>
+                <span style={{display: 'none'}}>{numGuessesRemaining}</span>
+                <div>Best Score: {bestScore}</div>
+                <div>Score: {score}</div>
+            </div>
         </div>
     )
 }
