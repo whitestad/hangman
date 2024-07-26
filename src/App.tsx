@@ -29,7 +29,7 @@ function App() {
   const [wordToGuess, setWordToGuess] = useState(() => getWordToGuess(last10Words));
   const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
   const [score, setScore] = useState<number>(0);
-  const [bestScore, setBestScore] = useState<number>(0);
+  const [bestScore, setBestScore] = useState<number>(-1);
   const [hasProcessedWin, setHasProcessedWin] = useState(false);
   const [user, setUser] = useState<string | null>(() => localStorage.getItem("nickname"));
 

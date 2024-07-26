@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { db } from "../firebaseConfig";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
-
-import style from './../styles/Leaderboard.module.css'
+import style from './../styles/Leaderboard.module.css';
+import Spinner from "./Spinner.tsx";
 
 // Определите интерфейс для объектов лидерборда
 interface LeaderboardEntry {
@@ -14,6 +14,7 @@ interface LeaderboardEntry {
 const Leaderboard = () => {
     // Укажите тип для состояния leaders
     const [leaders, setLeaders] = useState<LeaderboardEntry[]>([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchLeaderboard = async () => {
@@ -28,10 +29,15 @@ const Leaderboard = () => {
             }));
 
             setLeaders(leaderboard);
+            setLoading(false); // Установите загрузку в false после получения данных
         };
 
         fetchLeaderboard();
     }, []);
+
+    if (loading) {
+        return <Spinner/>;
+    }
 
     return (
         <div className={style.board}>
