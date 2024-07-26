@@ -11,10 +11,12 @@
 .box{
     border-bottom: 5px solid var(--color-1);
     border-radius: 2px;
+
+    transition: 0s;
 }
 
 .letter{
-
+    transition: 0s;
 }
 
 .spaceLetter{
