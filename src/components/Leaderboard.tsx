@@ -21,7 +21,7 @@ const Leaderboard = () => {
             const q = query(usersRef, orderBy("score", "desc"));
             const querySnapshot = await getDocs(q);
 
-            const leaderboard: LeaderboardEntry[] = querySnapshot.docs.slice(0, 100).map(doc => ({
+            const leaderboard: LeaderboardEntry[] = querySnapshot.docs.slice(0, 10).map(doc => ({
                 id: doc.id,
                 nickname: doc.data().nickname,
                 score: doc.data().score,
