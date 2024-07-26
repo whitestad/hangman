@@ -1,3 +1,6 @@
+import styles from "../styles/HangmanWord.module.css"
+
+
 type HangmanWordProps = {
   guessedLetters: string[]
   wordToGuess: string
@@ -6,23 +9,13 @@ type HangmanWordProps = {
 
 export function HangmanWord({guessedLetters, wordToGuess, revealWord = false}: HangmanWordProps) {
   return (
-    <div
-      style={{
-        display: "flex",
-        gap: ".25em",
-        fontSize: "3rem",
-        fontWeight: "bold",
-        textTransform: "uppercase",
-        // fontFamily: "monospace"
-      }}
+    <div className={styles.container}
     >
       {wordToGuess.split("").map((letter, index) => (
           letter != ' ' ?
-              <span style={{
-                      borderBottom: "5px solid var(--color-1)",
-                      borderRadius: '2px'
-                  }} key={index}>
+              <span className={styles.box} key={index}>
               <span
+                  className={styles.letter}
                   style={{
                       visibility: guessedLetters.includes(letter) || revealWord
                           ? "visible"
@@ -34,7 +27,7 @@ export function HangmanWord({guessedLetters, wordToGuess, revealWord = false}: H
               </span>
             </span>
               :
-              <span style={{width: '1.25rem'}}> </span>
+              <span className={styles.spaceLetter}> </span>
       ))}
     </div>
   )

@@ -1,0 +1,33 @@
+
+.container{
+    display: flex;
+    gap: .25em;
+    font-size: 3rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    /*fontFamily: "monospace"*/
+}
+
+.box{
+    border-bottom: 5px solid var(--color-1);
+    border-radius: 2px;
+}
+
+.letter{
+
+}
+
+.spaceLetter{
+    width: 1.25rem;
+}
+
+@media (max-width: 480px){
+    .container{
+        font-size: 1.75rem;
+    }
+
+    .box{
+        border-bottom: 4px solid var(--color-1);
+        border-radius: 2px;
+    }
+}

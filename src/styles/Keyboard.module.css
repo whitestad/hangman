@@ -1,3 +1,12 @@
+.list{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(75px, 1fr));
+    gap: 0.5rem;
+
+    width: 100%;
+    max-width: 100vw;
+}
+
 .btn {
     width: 100%;
     border: 3px solid var(--color-1);
@@ -13,7 +22,7 @@
 }
 
 .active {
-  background-color: var(--color-blue);
+  background-color: var(--success-color);
   color: white;
 }
 
@@ -24,4 +33,15 @@
 .btn:hover:not(:disabled),
 .btn:focus:not(:disabled) {
   background-color: var(--color-blue);
+}
+
+@media (max-width: 768px){
+    .list{
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+        gap: 0.5rem;
+    }
+    .btn{
+        font-size: 2rem;
+    }
 }

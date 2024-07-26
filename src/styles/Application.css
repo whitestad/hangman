@@ -8,9 +8,11 @@
 :root {
   --background-color: #000000;
   --color-1: #E8F9FD;
-  --success-color: #06d001;
-  --error-color: #ff0000;
+  --success-color: #50D890;
+  --error-color: #FF5656;
   --primary-color: #525CEB;
+
+  --color-blue: var(--primary-color);
 }
 
 *, *:hover{

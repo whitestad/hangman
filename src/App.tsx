@@ -149,7 +149,7 @@ function App() {
               guessedLetters={guessedLetters}
               wordToGuess={wordToGuess}
           />
-          <div style={{alignSelf: "stretch"}}>
+          <div style={{alignSelf: "stretch", maxWidth: "min(100%, 92vw)"}} >
             <Keyboard
                 isGameOver={isGameOver}
                 activeLetters={guessedLetters.filter(letter => wordToGuess.includes(letter))}

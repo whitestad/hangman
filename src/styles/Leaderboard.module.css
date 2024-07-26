@@ -25,3 +25,9 @@
 .item{
     font-size: 1.25rem;
 }
+
+@media (max-width: 768px){
+    .board{
+        width: 250px;
+    }
+}
