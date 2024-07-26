@@ -29,19 +29,10 @@ function App() {
   const numGuessesRemaining = maxGuesses - incorrectLetters.length;
   const isGameOver = isLoser || isWinner;
 
-  /*const successAudio = new Audio("../assets/success.wav");
-  const failAudio = new Audio("../assets/oof.wav");
-  const winnerAudio = new Audio("../assets/win.wav");
-  const loserAudio = new Audio("../assets/lose.wav");*/
+
 
   const addGuessedLetter = useCallback((letter: string) => {
     if (guessedLetters.includes(letter) || isWinner || isLoser) return;
-
-    /*if (wordToGuess.includes(letter)) {
-      successAudio.play();
-    } else {
-      failAudio.play();
-    }*/
 
     setGuessedLetters(currentLetters => [...currentLetters, letter]);
   }, [guessedLetters, isWinner, isLoser, wordToGuess]);
@@ -70,8 +61,6 @@ function App() {
 
   useEffect(() => {
     if (isWinner && !hasProcessedWin) {
-      // winnerAudio.play();
-
       const newScore = score + 1;
       setScore(newScore);
 
@@ -94,7 +83,6 @@ function App() {
 
       setHasProcessedWin(true);
     } else if (isLoser) {
-      // loserAudio.play();
       setScore(0);
     }
   }, [isWinner, isLoser, bestScore, hasProcessedWin, score, user]);
