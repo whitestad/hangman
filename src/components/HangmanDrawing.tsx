@@ -1,8 +1,10 @@
+import { CSSProperties } from 'react';
+
 const color = 'white';
 const scale = 0.8;
-const borderRadius = '12px';
+const borderRadius = '10px';
 
-const styles = {
+const styles: { [key: string]: CSSProperties } = {
     head: {
         width: `${50 * scale}px`,
         height: `${50 * scale}px`,
@@ -29,7 +31,7 @@ const styles = {
         position: 'absolute',
         top: `${150 * scale}px`,
         right: `${-100 * scale}px`,
-        rotate: '-30deg',
+        transform: 'rotate(-30deg)',
         transformOrigin: 'left bottom'
     },
     leftArm: {
@@ -40,7 +42,7 @@ const styles = {
         position: 'absolute',
         top: `${150 * scale}px`,
         right: `${10 * scale}px`,
-        rotate: '30deg',
+        transform: 'rotate(30deg)',
         transformOrigin: 'right bottom'
     },
     rightLeg: {
@@ -51,7 +53,7 @@ const styles = {
         position: 'absolute',
         top: `${210 * scale}px`,
         right: `${-90 * scale}px`,
-        rotate: '60deg',
+        transform: 'rotate(60deg)',
         transformOrigin: 'left bottom'
     },
     leftLeg: {
@@ -62,7 +64,7 @@ const styles = {
         position: 'absolute',
         top: `${210 * scale}px`,
         right: 0,
-        rotate: '-60deg',
+        transform: 'rotate(-60deg)',
         transformOrigin: 'right bottom'
     },
     structure: {
