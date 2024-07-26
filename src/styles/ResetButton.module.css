@@ -2,32 +2,33 @@
 
 .resetButton {
   width: 100%;
-  border: 3px solid red;
+  border: 3px solid var(--error-color);
+  border-radius: 10px;
   background: none;
   font-size: 2.5rem;
   text-transform: uppercase;
-  padding: .5rem;
+  padding: .5rem .5rem 1rem .5rem;
   font-weight: bold;
   cursor: pointer;
-  color: red;
+  color: var(--error-color);
 }
 
 .resetButtonWinner {
-  color: var(--color-blue);
-  border-color: var(--color-blue);
+  color: var(--success-color);
+  border-color: var(--success-color);
 }
 
 .resetButtonWinner:hover {
-  color: white;
-  background-color: var(--color-blue);
+  color: var(--color-1);
+  background-color: var(--success-color);
 }
 
 .resetButtonLoser {
-  color: red;
-  border-color: red;
+  color: var(--error-color);
+  border-color: var(--error-color);
 }
 
 .resetButtonLoser:hover {
-  color: white;
-  background-color: red;
+  color: var(--color-1);
+  background-color: var(--error-color);
 }

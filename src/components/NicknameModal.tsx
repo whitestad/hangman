@@ -2,6 +2,8 @@ import { useState } from "react";
 import { db } from "../firebaseConfig";
 import { collection, getDocs, query, where, addDoc } from "firebase/firestore";
 
+import styles from "../styles/NicknameModal.module.css"
+
 interface NicknameModalProps {
     setUser: (nickname: string) => void;
 }
@@ -28,19 +30,23 @@ const NicknameModal: React.FC<NicknameModalProps> = ({ setUser }) => {
     };
 
     return (
-        <div className="modal">
-            <form onSubmit={handleSubmit}>
-                <label>
-                    Enter Nickname:
-                    <input
-                        type="text"
-                        value={nickname}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNickname(e.target.value)}
-                        required
-                    />
+        <div className={styles.modal}>
+            <form className={styles.form} onSubmit={handleSubmit}>
+                <label className={styles.label}>
+                    Enter Username:
+
                 </label>
-                <button type="submit">Submit</button>
-                {error && <p>{error}</p>}
+                <input
+                    className={styles.input}
+                    type="text"
+                    value={nickname}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNickname(e.target.value)}
+
+                    required
+                />
+                <br></br>
+                <button className={styles.button} type="submit">Submit</button>
+                {error && <p className={styles.error}>{error}</p>}
             </form>
         </div>
     );

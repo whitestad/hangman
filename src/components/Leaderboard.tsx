@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { db } from "../firebaseConfig";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 
+import style from './../styles/Leaderboard.module.css'
+
 // Определите интерфейс для объектов лидерборда
 interface LeaderboardEntry {
     id: string;
@@ -19,7 +21,7 @@ const Leaderboard = () => {
             const q = query(usersRef, orderBy("score", "desc"));
             const querySnapshot = await getDocs(q);
 
-            const leaderboard: LeaderboardEntry[] = querySnapshot.docs.map(doc => ({
+            const leaderboard: LeaderboardEntry[] = querySnapshot.docs.slice(0, 100).map(doc => ({
                 id: doc.id,
                 nickname: doc.data().nickname,
                 score: doc.data().score,
@@ -32,15 +34,15 @@ const Leaderboard = () => {
     }, []);
 
     return (
-        <div>
-            <h2>Leaderboard</h2>
-            <ul>
+        <div className={style.board}>
+            <h2 className={style.h2}>Leaderboard</h2>
+            <div className={style.list}>
                 {leaders.map((leader, index) => (
-                    <li key={leader.id}>
+                    <div className={style.item} key={leader.id}>
                         {index + 1}. {leader.nickname}: {leader.score}
-                    </li>
+                    </div>
                 ))}
-            </ul>
+            </div>
         </div>
     );
 };

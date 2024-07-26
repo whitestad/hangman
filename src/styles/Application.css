@@ -1,8 +1,22 @@
+@font-face {
+  font-family: 'chawp';
+  src: url('/public/fonts/chawp.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 :root {
   --background-color: #000000;
-  --color-1: #dcd1d1;
-  --error-color: #ff5858;
-  --color-blue: #5DADEC;
+  --color-1: #E8F9FD;
+  --success-color: #06d001;
+  --error-color: #ff0000;
+  --primary-color: #525CEB;
+}
+
+*, *:hover{
+  font-family: chawp, sans-serif;
+
+  transition: 0.2s;
 }
 
 html{
@@ -12,4 +26,8 @@ html{
 body{
   background-color: var(--background-color);
   color: white;
+}
+
+::-webkit-scrollbar {
+  width: 0;
 }

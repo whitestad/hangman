@@ -25,7 +25,7 @@ function App() {
   const incorrectLetters = guessedLetters.filter(letter => !wordToGuess.includes(letter));
   const maxGuesses = 6;
   const isLoser = incorrectLetters.length >= maxGuesses;
-  const isWinner = wordToGuess.split("").every(letter => guessedLetters.includes(letter));
+  const isWinner = wordToGuess.replace(' ', '').split("").every(letter => guessedLetters.includes(letter));
   const numGuessesRemaining = maxGuesses - incorrectLetters.length;
   const isGameOver = isLoser || isWinner;
 
@@ -124,16 +124,7 @@ function App() {
   }
 
   return (
-      <div
-          style={{
-            maxWidth: "800px",
-            display: "flex",
-            flexDirection: "column",
-            gap: "2rem",
-            margin: "0 auto",
-            alignItems: "center",
-          }}
-      >
+      <>
         <InfoPanel
             isWinner={isWinner}
             isLoser={isLoser}
@@ -141,23 +132,35 @@ function App() {
             score={score}
             bestScore={bestScore}
         />
-        <HangmanDrawing numBadGuesses={incorrectLetters.length} />
-        <HangmanWord
-            revealWord={isLoser}
-            guessedLetters={guessedLetters}
-            wordToGuess={wordToGuess}
-        />
-        <div style={{ alignSelf: "stretch" }}>
-          <Keyboard
-              isGameOver={isGameOver}
-              activeLetters={guessedLetters.filter(letter => wordToGuess.includes(letter))}
-              inactiveLetters={incorrectLetters}
-              addGuessedLetter={addGuessedLetter}
+        <div
+            style={{
+              maxWidth: "800px",
+              display: "flex",
+              flexDirection: "column",
+              gap: "2rem",
+              margin: "0 auto",
+              alignItems: "center",
+            }}
+        >
+
+          <HangmanDrawing numBadGuesses={incorrectLetters.length}/>
+          <HangmanWord
+              revealWord={isLoser}
+              guessedLetters={guessedLetters}
+              wordToGuess={wordToGuess}
           />
+          <div style={{alignSelf: "stretch"}}>
+            <Keyboard
+                isGameOver={isGameOver}
+                activeLetters={guessedLetters.filter(letter => wordToGuess.includes(letter))}
+                inactiveLetters={incorrectLetters}
+                addGuessedLetter={addGuessedLetter}
+            />
+          </div>
+          <RestartGameButton isGameOver={isGameOver} isWinner={isWinner} resetGame={resetGame}/>
+          <Leaderboard/>
         </div>
-        <RestartGameButton isGameOver={isGameOver} isWinner={isWinner} resetGame={resetGame} />
-        <Leaderboard />
-      </div>
+      </>
   );
 }
 

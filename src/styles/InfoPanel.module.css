@@ -1,12 +1,36 @@
 @import './Application.css';
 
+.header{
+  width: calc(100% - 4rem);
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  padding: 2rem;
+}
+
+.navs{
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+}
+
+.nav{
+  width: auto;
+  height: 70px;
+}
+
+.nav img{
+  width: auto;
+  height: 100%;
+}
+
 .infoPanel {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
   font-size: 1.5rem;
   text-align: center;
-  margin: 2rem 0;
-  padding: 2rem;
 
   display: flex;
   flex-direction: column;
