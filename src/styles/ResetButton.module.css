@@ -1,0 +1,33 @@
+@import './Application.css';
+
+.resetButton {
+  width: 100%;
+  border: 3px solid red;
+  background: none;
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  padding: .5rem;
+  font-weight: bold;
+  cursor: pointer;
+  color: red;
+}
+
+.resetButtonWinner {
+  color: var(--color-blue);
+  border-color: var(--color-blue);
+}
+
+.resetButtonWinner:hover {
+  color: white;
+  background-color: var(--color-blue);
+}
+
+.resetButtonLoser {
+  color: red;
+  border-color: red;
+}
+
+.resetButtonLoser:hover {
+  color: white;
+  background-color: red;
+}
