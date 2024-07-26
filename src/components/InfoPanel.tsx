@@ -28,11 +28,11 @@ export function InfoPanel({ isWinner, isLoser, numGuessesRemaining, score, bestS
             </div>
 
             <div className={style.navs}>
-                <a href={"/"} className={style.nav}><img src={ft1}></img></a>
-                <a href={"/"} className={style.nav}><img src={ft2}></img></a>
-                <a href={"/"} className={style.nav}><img src={ft3}></img></a>
-                <a href={"/"} className={style.nav}><img src={ft4}></img></a>
-                <a href={"/"} className={style.nav}><img src={ft5}></img></a>
+                <a href={"https://t.me/hangmansolana"} className={style.nav}><img src={ft1}></img></a>
+                <a href={"https://t.me/hangmansolana"} className={style.nav}><img src={ft2}></img></a>
+                <a href={"https://t.me/hangmansolana"} className={style.nav}><img src={ft3}></img></a>
+                <a href={"https://t.me/hangmansolana"} className={style.nav}><img src={ft4}></img></a>
+                <a href={"https://t.me/hangmansolana"} className={style.nav}><img src={ft5}></img></a>
             </div>
         </div>
     )
