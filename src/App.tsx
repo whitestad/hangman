@@ -7,8 +7,9 @@ import { Keyboard } from "./components/Keyboard";
 import { RestartGameButton } from "./components/RestartGameButton";
 import NicknameModal from "./components/NicknameModal";
 import Leaderboard from "./components/Leaderboard";
+import Spinner from "./components/Spinner";
 import { db } from "./firebaseConfig";
-import { collection, query, getDocs, updateDoc, where, doc } from "firebase/firestore";
+import { collection, query, getDocs, where, doc, updateDoc } from "firebase/firestore";
 
 // Функция для выбора нового слова, исключая последние 10 угаданных слов
 function getWordToGuess(excludeWords: string[]) {
@@ -29,9 +30,11 @@ function App() {
   const [wordToGuess, setWordToGuess] = useState(() => getWordToGuess(last10Words));
   const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
   const [score, setScore] = useState<number>(0);
-  const [bestScore, setBestScore] = useState<number>(-1);
+  const [bestScore, setBestScore] = useState<number>(0);
   const [hasProcessedWin, setHasProcessedWin] = useState(false);
-  const [user, setUser] = useState<string | null>(() => localStorage.getItem("nickname"));
+  const [user, setUser] = useState<string | null>(null);
+  const [loadingUser, setLoadingUser] = useState(true);
+  const [loadingBestScore, setLoadingBestScore] = useState(true);
 
   const incorrectLetters = guessedLetters.filter(letter => !wordToGuess.includes(letter));
   const maxGuesses = 6;
@@ -61,13 +64,32 @@ function App() {
       const userDoc = querySnapshot.docs[0];
       setBestScore(userDoc.data().score);
     }
+    setLoadingBestScore(false);
   }, []);
 
   useEffect(() => {
-    if (user) {
-      fetchBestScore(user);
+    const savedUser = localStorage.getItem("nickname");
+    if (savedUser) {
+      const checkUserExists = async () => {
+        const usersRef = collection(db, "users");
+        const q = query(usersRef, where("nickname", "==", savedUser));
+        const querySnapshot = await getDocs(q);
+        if (!querySnapshot.empty) {
+          setUser(savedUser);
+          fetchBestScore(savedUser);
+        } else {
+          localStorage.removeItem("nickname");
+          setUser(null);
+          setLoadingBestScore(false);
+        }
+        setLoadingUser(false);
+      };
+      checkUserExists();
+    } else {
+      setLoadingUser(false);
+      setLoadingBestScore(false);
     }
-  }, [user, fetchBestScore]);
+  }, [fetchBestScore]);
 
   useEffect(() => {
     if (isWinner && !hasProcessedWin) {
@@ -99,8 +121,6 @@ function App() {
         localStorage.setItem("last10Words", JSON.stringify(newLast10Words));
         return newLast10Words;
       });
-
-
     } else if (isLoser) {
       setScore(0);
 
@@ -112,6 +132,10 @@ function App() {
       });
     }
   }, [isWinner, isLoser, bestScore, hasProcessedWin, score, user, wordToGuess]);
+
+  if (loadingUser || loadingBestScore) {
+    return <Spinner />;
+  }
 
   if (!user) {
     return <NicknameModal setUser={setUser} />;
