@@ -99,25 +99,25 @@ function App() {
     }
   }, [isWinner, isLoser, bestScore, hasProcessedWin, score, user]);
 
-  useEffect(() => {
-    const handler = (e: KeyboardEvent) => {
-      const key = e.key;
-
-      e.preventDefault();
-
-      if (key.match(/^[a-z]$/)) {
-        addGuessedLetter(key);
-      } else if (isGameOver && key == "Enter") {
-        resetGame();
-      }
-    };
-
-    document.addEventListener("keypress", handler);
-
-    return () => {
-      document.removeEventListener("keypress", handler);
-    };
-  }, [guessedLetters, addGuessedLetter, isGameOver, resetGame]);
+  // useEffect(() => {
+  //   const handler = (e: KeyboardEvent) => {
+  //     const key = e.key;
+  //
+  //     e.preventDefault();
+  //
+  //     if (key.match(/^[a-z]$/)) {
+  //       addGuessedLetter(key);
+  //     } else if (isGameOver && key == "Enter") {
+  //       resetGame();
+  //     }
+  //   };
+  //
+  //   document.addEventListener("keypress", handler);
+  //
+  //   return () => {
+  //     document.removeEventListener("keypress", handler);
+  //   };
+  // }, [guessedLetters, addGuessedLetter, isGameOver, resetGame]);
 
   if (!user) {
     return <NicknameModal setUser={setUser} />;

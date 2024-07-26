@@ -12,6 +12,7 @@ export function InfoPanel({ isWinner, isLoser, numGuessesRemaining, score, bestS
         <div className={'infoPanel'}>
             {isWinner && <div>You Win!</div>}
             {isLoser && <div>You Lose!</div>}
+            <span>{numGuessesRemaining}</span>
             <div>Best Score: {bestScore}</div>
             <div>Score: {score}</div>
         </div>

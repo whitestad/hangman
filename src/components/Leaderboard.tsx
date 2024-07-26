@@ -1,10 +1,17 @@
-// components/Leaderboard.tsx
 import { useState, useEffect } from "react";
 import { db } from "../firebaseConfig";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 
+// Определите интерфейс для объектов лидерборда
+interface LeaderboardEntry {
+    id: string;
+    nickname: string;
+    score: number;
+}
+
 const Leaderboard = () => {
-    const [leaders, setLeaders] = useState([]);
+    // Укажите тип для состояния leaders
+    const [leaders, setLeaders] = useState<LeaderboardEntry[]>([]);
 
     useEffect(() => {
         const fetchLeaderboard = async () => {
@@ -12,9 +19,10 @@ const Leaderboard = () => {
             const q = query(usersRef, orderBy("score", "desc"));
             const querySnapshot = await getDocs(q);
 
-            const leaderboard = querySnapshot.docs.map(doc => ({
+            const leaderboard: LeaderboardEntry[] = querySnapshot.docs.map(doc => ({
                 id: doc.id,
-                ...doc.data(),
+                nickname: doc.data().nickname,
+                score: doc.data().score,
             }));
 
             setLeaders(leaderboard);
