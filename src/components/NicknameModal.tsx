@@ -1,13 +1,16 @@
-// components/NicknameModal.tsx
 import { useState } from "react";
 import { db } from "../firebaseConfig";
 import { collection, getDocs, query, where, addDoc } from "firebase/firestore";
 
-function NicknameModal({ setUser }) {
-    const [nickname, setNickname] = useState("");
-    const [error, setError] = useState("");
+interface NicknameModalProps {
+    setUser: (nickname: string) => void;
+}
 
-    const handleSubmit = async (e) => {
+const NicknameModal: React.FC<NicknameModalProps> = ({ setUser }) => {
+    const [nickname, setNickname] = useState<string>("");
+    const [error, setError] = useState<string>("");
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         const usersRef = collection(db, "users");
@@ -32,7 +35,7 @@ function NicknameModal({ setUser }) {
                     <input
                         type="text"
                         value={nickname}
-                        onChange={(e) => setNickname(e.target.value)}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNickname(e.target.value)}
                         required
                     />
                 </label>
@@ -41,6 +44,6 @@ function NicknameModal({ setUser }) {
             </form>
         </div>
     );
-}
+};
 
 export default NicknameModal;
