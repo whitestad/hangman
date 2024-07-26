@@ -25,9 +25,9 @@ export function HangmanWord({guessedLetters, wordToGuess, revealWord = false}: H
               >
                 {letter}
               </span>
-            </span>
+            </span >
               :
-              <span className={styles.spaceLetter}> </span>
+              <span className={styles.spaceLetter} key={index}> </span>
       ))}
     </div>
   )

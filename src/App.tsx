@@ -1,21 +1,32 @@
 import { useState, useEffect, useCallback } from "react";
 import words from "./assets/wordList.json";
-import { HangmanDrawing } from "./components/HangmanDrawing.tsx";
-import { HangmanWord } from "./components/HangmanWord.tsx";
-import { InfoPanel } from "./components/InfoPanel.tsx";
-import { Keyboard } from "./components/Keyboard.tsx";
-import { RestartGameButton } from "./components/RestartGameButton.tsx";
+import { HangmanDrawing } from "./components/HangmanDrawing";
+import { HangmanWord } from "./components/HangmanWord";
+import { InfoPanel } from "./components/InfoPanel";
+import { Keyboard } from "./components/Keyboard";
+import { RestartGameButton } from "./components/RestartGameButton";
 import NicknameModal from "./components/NicknameModal";
 import Leaderboard from "./components/Leaderboard";
 import { db } from "./firebaseConfig";
 import { collection, query, getDocs, updateDoc, where, doc } from "firebase/firestore";
 
-function getWordToGuess() {
-  return words[Math.floor(Math.random() * words.length)];
+// Функция для выбора нового слова, исключая последние 10 угаданных слов
+function getWordToGuess(excludeWords: string[]) {
+  let newWord;
+  do {
+    newWord = words[Math.floor(Math.random() * words.length)];
+  } while (excludeWords.includes(newWord));
+  return newWord;
 }
 
 function App() {
-  const [wordToGuess, setWordToGuess] = useState(getWordToGuess());
+  // Инициализация состояния с использованием localStorage
+  const [last10Words, setLast10Words] = useState<string[]>(() => {
+    const savedWords = localStorage.getItem("last10Words");
+    return savedWords ? JSON.parse(savedWords) : [];
+  });
+
+  const [wordToGuess, setWordToGuess] = useState(() => getWordToGuess(last10Words));
   const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
   const [score, setScore] = useState<number>(0);
   const [bestScore, setBestScore] = useState<number>(0);
@@ -29,8 +40,6 @@ function App() {
   const numGuessesRemaining = maxGuesses - incorrectLetters.length;
   const isGameOver = isLoser || isWinner;
 
-
-
   const addGuessedLetter = useCallback((letter: string) => {
     if (guessedLetters.includes(letter) || isWinner || isLoser) return;
 
@@ -39,9 +48,10 @@ function App() {
 
   const resetGame = useCallback(() => {
     setGuessedLetters([]);
-    setWordToGuess(getWordToGuess());
+    const newWord = getWordToGuess(last10Words);
+    setWordToGuess(newWord);
     setHasProcessedWin(false);
-  }, []);
+  }, [last10Words]);
 
   const fetchBestScore = useCallback(async (nickname: string) => {
     const usersRef = collection(db, "users");
@@ -82,30 +92,26 @@ function App() {
       }
 
       setHasProcessedWin(true);
+
+      // Обновить историю последних 10 слов и сохранить в localStorage
+      setLast10Words(prev => {
+        const newLast10Words = [wordToGuess, ...prev].slice(0, 10);
+        localStorage.setItem("last10Words", JSON.stringify(newLast10Words));
+        return newLast10Words;
+      });
+
+
     } else if (isLoser) {
       setScore(0);
-    }
-  }, [isWinner, isLoser, bestScore, hasProcessedWin, score, user]);
 
-  // useEffect(() => {
-  //   const handler = (e: KeyboardEvent) => {
-  //     const key = e.key;
-  //
-  //     e.preventDefault();
-  //
-  //     if (key.match(/^[a-z]$/)) {
-  //       addGuessedLetter(key);
-  //     } else if (isGameOver && key == "Enter") {
-  //       resetGame();
-  //     }
-  //   };
-  //
-  //   document.addEventListener("keypress", handler);
-  //
-  //   return () => {
-  //     document.removeEventListener("keypress", handler);
-  //   };
-  // }, [guessedLetters, addGuessedLetter, isGameOver, resetGame]);
+      // Обновить историю последних 10 слов и сохранить в localStorage
+      setLast10Words(prev => {
+        const newLast10Words = [wordToGuess, ...prev].slice(0, 10);
+        localStorage.setItem("last10Words", JSON.stringify(newLast10Words));
+        return newLast10Words;
+      });
+    }
+  }, [isWinner, isLoser, bestScore, hasProcessedWin, score, user, wordToGuess]);
 
   if (!user) {
     return <NicknameModal setUser={setUser} />;
@@ -130,14 +136,13 @@ function App() {
               alignItems: "center",
             }}
         >
-
-          <HangmanDrawing numBadGuesses={incorrectLetters.length}/>
+          <HangmanDrawing numBadGuesses={incorrectLetters.length} />
           <HangmanWord
               revealWord={isLoser}
               guessedLetters={guessedLetters}
               wordToGuess={wordToGuess}
           />
-          <div style={{alignSelf: "stretch", maxWidth: "min(100%, 92vw)"}} >
+          <div style={{ alignSelf: "stretch", maxWidth: "min(100%, 92vw)" }} >
             <Keyboard
                 isGameOver={isGameOver}
                 activeLetters={guessedLetters.filter(letter => wordToGuess.includes(letter))}
@@ -145,8 +150,8 @@ function App() {
                 addGuessedLetter={addGuessedLetter}
             />
           </div>
-          <RestartGameButton isGameOver={isGameOver} isWinner={isWinner} resetGame={resetGame}/>
-          <Leaderboard/>
+          <RestartGameButton isGameOver={isGameOver} isWinner={isWinner} resetGame={resetGame} />
+          <Leaderboard />
         </div>
       </>
   );
