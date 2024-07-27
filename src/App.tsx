@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState, useEffect, useCallback } from "react";
 import words from "./assets/wordList.json";
 import { HangmanDrawing } from "./components/HangmanDrawing";
@@ -8,6 +9,7 @@ import { RestartGameButton } from "./components/RestartGameButton";
 import NicknameModal from "./components/NicknameModal";
 import Leaderboard from "./components/Leaderboard";
 import Spinner from "./components/Spinner";
+import AudioControlButton from "./components/AudioControlButton";
 import { db } from "./firebaseConfig";
 import { collection, query, getDocs, where, doc, updateDoc } from "firebase/firestore";
 
@@ -197,6 +199,7 @@ function App() {
           </div>
           <RestartGameButton isGameOver={isGameOver} isWinner={isWinner} resetGame={resetGame} />
           <Leaderboard />
+          <AudioControlButton audio={successAudio} />
         </div>
       </>
   );
