@@ -1,15 +1,14 @@
-import React from 'react';
 import { useState, useEffect, useCallback } from "react";
-import words from "./assets/wordList.json";
+import words from "@assets/wordList.json";
 import { HangmanDrawing } from "./components/HangmanDrawing";
 import { HangmanWord } from "./components/HangmanWord";
 import { InfoPanel } from "./components/InfoPanel";
 import { Keyboard } from "./components/Keyboard";
 import { RestartGameButton } from "./components/RestartGameButton";
 import NicknameModal from "./components/NicknameModal";
-import Leaderboard from "./components/Leaderboard";
-import Spinner from "./components/Spinner";
-import AudioControlButton from "./components/AudioControlButton";
+import Leaderboard from '@components/Leaderboard';
+import Spinner from "@components/Spinner";
+import AudioControlButton from "@components/AudioControlButton";
 import { db } from "./firebaseConfig";
 import { collection, query, getDocs, where, doc, updateDoc } from "firebase/firestore";
 

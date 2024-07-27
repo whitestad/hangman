@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { db } from "../firebaseConfig";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import style from './../styles/Leaderboard.module.css';
-import Spinner from "./Spinner.tsx";
+import Spinner from "@components/Spinner";
 
 // Определите интерфейс для объектов лидерборда
 interface LeaderboardEntry {
