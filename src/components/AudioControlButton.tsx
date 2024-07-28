@@ -3,22 +3,20 @@ import playIcon from '@assets/play.png';
 import pauseIcon from '@assets/pause.png';
 import styles from '@styles/AudioControlButton.module.css';
 
-interface AudioControlButtonProps {
-    audio: HTMLAudioElement;
-}
+const music = new Audio("../assets/music.mp3");
 
-const AudioControlButton: React.FC<AudioControlButtonProps> = ({ audio }) => {
+const AudioControlButton: React.FC = () => {
     const [isPlaying, setIsPlaying] = useState(false);
 
     useEffect(() => {
-        audio.loop = true;
-    }, [audio]);
+        music.loop = true;
+    }, [music]);
 
     const togglePlayPause = () => {
         if (isPlaying) {
-            audio.pause();
+            music.pause();
         } else {
-            audio.play();
+            music.play();
         }
         setIsPlaying(!isPlaying);
     };

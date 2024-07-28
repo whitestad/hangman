@@ -49,8 +49,6 @@ function App() {
   const winnerAudio = new Audio("../assets/win.wav");
   const loserAudio = new Audio("../assets/lose.wav");
 
-  const music = new Audio("../assets/music.mp3");
-
   const addGuessedLetter = useCallback((letter: string) => {
     if (guessedLetters.includes(letter) || isWinner || isLoser) return;
 
@@ -200,7 +198,7 @@ function App() {
           </div>
           <RestartGameButton isGameOver={isGameOver} isWinner={isWinner} resetGame={resetGame} />
           <Leaderboard />
-          <AudioControlButton audio={music} />
+          <AudioControlButton />
         </div>
       </>
   );
