@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import playIcon from '../assets/play.png';
-import pauseIcon from '../assets/pause.png';
-import styles from './../styles/AudioControlButton.module.css';
+import React, { useState, useEffect } from 'react';
+import playIcon from '@assets/play.png';
+import pauseIcon from '@assets/pause.png';
+import styles from '@styles/AudioControlButton.module.css';
 
 interface AudioControlButtonProps {
     audio: HTMLAudioElement;
@@ -9,6 +9,10 @@ interface AudioControlButtonProps {
 
 const AudioControlButton: React.FC<AudioControlButtonProps> = ({ audio }) => {
     const [isPlaying, setIsPlaying] = useState(false);
+
+    useEffect(() => {
+        audio.loop = true;
+    }, [audio]);
 
     const togglePlayPause = () => {
         if (isPlaying) {

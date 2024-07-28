@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import words from "@assets/wordList.json";
+import wordList from "@assets/wordList.json";
 import { HangmanDrawing } from "@components/HangmanDrawing";
 import { HangmanWord } from "@components/HangmanWord";
 import { InfoPanel } from "@components/InfoPanel";
@@ -9,14 +9,14 @@ import NicknameModal from "@components/NicknameModal";
 import Leaderboard from '@components/Leaderboard';
 import Spinner from "@components/Spinner";
 import AudioControlButton from "@components/AudioControlButton";
-import { db } from "./firebaseConfig";
+import { db } from "@/firebaseConfig";
 import { collection, query, getDocs, where, doc, updateDoc } from "firebase/firestore";
 
 // Функция для выбора нового слова, исключая последние 10 угаданных слов
 function getWordToGuess(excludeWords: string[]) {
   let newWord;
   do {
-    newWord = words[Math.floor(Math.random() * words.length)];
+    newWord = wordList[Math.floor(Math.random() * wordList.length)];
   } while (excludeWords.includes(newWord));
   return newWord;
 }
@@ -48,6 +48,8 @@ function App() {
   const failAudio = new Audio("../assets/oof.wav");
   const winnerAudio = new Audio("../assets/win.wav");
   const loserAudio = new Audio("../assets/lose.wav");
+
+  const music = new Audio("../assets/music.mp3");
 
   const addGuessedLetter = useCallback((letter: string) => {
     if (guessedLetters.includes(letter) || isWinner || isLoser) return;
@@ -198,7 +200,7 @@ function App() {
           </div>
           <RestartGameButton isGameOver={isGameOver} isWinner={isWinner} resetGame={resetGame} />
           <Leaderboard />
-          <AudioControlButton audio={successAudio} />
+          <AudioControlButton audio={music} />
         </div>
       </>
   );
