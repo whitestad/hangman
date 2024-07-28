@@ -5,6 +5,7 @@ import ft3 from '../assets/img/ft3.png';
 import ft4 from '../assets/img/ft4.png';
 import ft5 from '../assets/img/ft5.png';
 import Spinner from "./Spinner.tsx";
+import AudioControlButton from './AudioControlButton.tsx';
 
 interface InfoPanelProps {
     isWinner: boolean;
@@ -34,6 +35,8 @@ export function InfoPanel({ isWinner, isLoser, numGuessesRemaining, score, bestS
                 <a href={"https://t.me/hangmansolana"} className={style.nav}><img src={ft3} alt="ft3" /></a>
                 <a href={"https://t.me/hangmansolana"} className={style.nav}><img src={ft4} alt="ft4" /></a>
                 <a href={"https://t.me/hangmansolana"} className={style.nav}><img src={ft5} alt="ft5" /></a>
+
+                <AudioControlButton />
             </div>
         </div>
     );

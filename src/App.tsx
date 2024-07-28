@@ -198,7 +198,7 @@ function App() {
           </div>
           <RestartGameButton isGameOver={isGameOver} isWinner={isWinner} resetGame={resetGame} />
           <Leaderboard />
-          <AudioControlButton />
+
         </div>
       </>
   );
