@@ -3,14 +3,17 @@ import playIcon from '@assets/play.png';
 import pauseIcon from '@assets/pause.png'
 import styles from '@styles/AudioControlButton.module.css';
 
-const music = new Audio("../assets/music.mp3");
+const music = new Audio("../assets/music.m4a");
 
 
 const AudioControlButton: React.FC = () => {
-    const [isPlaying, setIsPlaying] = useState(false);
+    const [isPlaying, setIsPlaying] = useState(true);
 
     useEffect(() => {
         music.loop = true;
+        music.play().then(r => console.log(r)).catch(e => {
+            setIsPlaying(false);
+        });
     }, [music]);
 
     const togglePlayPause = () => {
