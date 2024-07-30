@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import playIcon from '@assets/play.png';
-import pauseIcon from '@assets/pause.png';
+import pauseIcon from '@assets/pause.png'
 import styles from '@styles/AudioControlButton.module.css';
 
 const music = new Audio("../assets/music.mp3");
+
 
 const AudioControlButton: React.FC = () => {
     const [isPlaying, setIsPlaying] = useState(false);
