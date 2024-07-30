@@ -15,15 +15,15 @@
 }
 
 .icon {
-    width: 100%;
-    height: 100%;
+    width: inherit;
+    height: inherit;
 }
 
 @media (max-width: 768px){
     .button {
         position: inherit;
-        width: 60px;
-        height: 55px;
+        width: 50px;
+        height: 50px;
         transform: none;
 
 
