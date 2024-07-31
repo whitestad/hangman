@@ -6,6 +6,7 @@ import ft4 from '../assets/img/ft4.png';
 import ft5 from '../assets/img/ft5.png';
 import Spinner from "./Spinner.tsx";
 import AudioControlButton from './AudioControlButton.tsx';
+import ContractComponent from "@components/ContractComponent.tsx";
 
 interface InfoPanelProps {
     isWinner: boolean;
@@ -25,9 +26,11 @@ export function InfoPanel({ isWinner, isLoser, numGuessesRemaining, score, bestS
                 <div className={style.recordsFlex}>
                     <span style={{ display: 'none' }}>{numGuessesRemaining}</span>
                     <div style={{display: 'flex', gap: '1rem'}}>Best Score: {bestScore === -1 ? <Spinner size={'20px'} /> : bestScore}</div>
-                    <div>Score: {score}</div>
+                    <div style={{display: 'flex', gap: '1rem'}}>Score: {score}</div>
                 </div>
             </div>
+
+            <ContractComponent></ContractComponent>
 
             <div className={style.navs}>
                 <a href={"https://t.me/hangmansolana"} className={style.nav}><img src={ft1} alt="ft1" /></a>

@@ -1,0 +1,45 @@
+.contractContainer {
+    padding: 0px;
+    max-width: 700px;
+    border: 0px solid #ccc;
+    border-radius: 15px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.contractTitle {
+    margin: 0;
+}
+
+.contractInputContainer {
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+}
+
+.contractInput {
+    flex: 1;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 10px;
+    border: none;
+    margin-right: 10px;
+}
+
+.contractCopyButton {
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 10px;
+    border: none;
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.copySuccess {
+    color: green;
+    margin: 0;
+}
